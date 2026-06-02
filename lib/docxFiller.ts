@@ -31,6 +31,7 @@ export async function fillDocxTemplate(
   const doc = new Docxtemplater(zip, {
     paragraphLoop: true,
     linebreaks: true,
+    delimiters: { start: '{{', end: '}}' },
     // Trả về chuỗi rỗng cho mọi placeholder không có giá trị
     nullGetter: () => '',
   });
