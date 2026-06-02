@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Search,
   Filter,
@@ -20,6 +21,7 @@ import {
   ArrowRight,
   ClipboardCopy,
   Check,
+  Home,
 } from 'lucide-react';
 import { SubmissionRecord, GetSubmissionsResponse } from '@/lib/sheetsApi';
 
@@ -234,6 +236,15 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="btn-outline p-2 text-neutral-600 hover:text-bidv-teal flex items-center gap-1.5 text-xs rounded-lg"
+              title="Quay về trang chủ"
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Trang chủ</span>
+            </Link>
+
             <button
               onClick={() => fetchSubmissions(true)}
               disabled={loading || refreshing}
@@ -354,7 +365,7 @@ export default function AdminDashboardPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Tìm kiếm theo Tên tổ chức, MST, CCCD..."
-              className="input-base pl-9 py-2 text-xs"
+              className="input-base !pl-10 py-2 text-xs"
             />
           </div>
 
@@ -366,7 +377,7 @@ export default function AdminDashboardPage() {
             <select
               value={filterDoiTuong}
               onChange={(e) => setFilterDoiTuong(e.target.value)}
-              className="input-base pl-8 py-2 text-xs bg-no-repeat bg-right"
+              className="input-base !pl-9 py-2 text-xs bg-no-repeat bg-right"
             >
               <option value="all">Tất cả Đối tượng</option>
               <option value="khach-hang-to-chuc">Khách hàng tổ chức</option>
@@ -383,7 +394,7 @@ export default function AdminDashboardPage() {
               value={filterMucDich}
               onChange={(e) => setFilterMucDich(e.target.value)}
               disabled={activeTab === 'BM02'}
-              className="input-base pl-8 py-2 text-xs bg-no-repeat bg-right disabled:opacity-50"
+              className="input-base !pl-9 py-2 text-xs bg-no-repeat bg-right disabled:opacity-50"
             >
               <option value="all">Tất cả Mục đích</option>
               <option value="mo-moi">Đăng ký mở mới</option>

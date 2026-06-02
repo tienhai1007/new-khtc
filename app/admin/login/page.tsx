@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Lock, Eye, EyeOff, Loader2, AlertCircle, ArrowLeft } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -87,7 +88,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Nhập mật khẩu quản trị..."
                 disabled={isLoading}
-                className="input-base pl-9 pr-10 py-2.5"
+                className="input-base !pl-10 pr-10 py-2.5"
                 autoFocus
               />
               <button
@@ -128,10 +129,19 @@ export default function AdminLoginPage() {
         </form>
 
         {/* Security Alert Footer */}
-        <div className="text-center pt-2 border-t border-neutral-100">
+        <div className="text-center pt-2 border-t border-neutral-100 space-y-3">
           <p className="text-[10px] text-neutral-400 leading-normal">
             Hệ thống nội bộ được bảo mật. Mọi hành vi truy cập trái phép sẽ bị ghi lại log và xử lý theo quy định của ngân hàng.
           </p>
+          <div className="flex justify-center pt-1">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-bidv-teal font-medium transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Quay lại trang chủ
+            </Link>
+          </div>
         </div>
       </div>
     </div>
