@@ -141,7 +141,7 @@ export default function HomePage() {
                 priority
               />
             </div>
-            <div className="border-l border-neutral-200 pl-3">
+            <div className="border-l border-neutral-200 pl-3 hidden sm:block">
               <p className="text-sm font-semibold text-bidv-teal leading-tight">
                 Biểu mẫu Đăng ký / Thay đổi thông tin
               </p>
@@ -156,7 +156,7 @@ export default function HomePage() {
             className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5 border border-neutral-200 text-neutral-600 hover:text-bidv-teal hover:border-bidv-teal/50 hover:bg-bidv-teal-light/45 rounded-lg transition-all shadow-sm"
           >
             <Shield className="w-3.5 h-3.5" />
-            Trang Quản trị
+            <span className="hidden sm:inline">Trang Quản trị</span>
           </Link>
         </div>
       </header>

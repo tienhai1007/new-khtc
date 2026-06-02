@@ -229,7 +229,7 @@ export default function AdminDashboardPage() {
               className="h-8 w-auto object-contain"
               priority
             />
-            <div className="border-l border-neutral-200 pl-3">
+            <div className="border-l border-neutral-200 pl-3 hidden sm:block">
               <span className="text-xs font-semibold text-bidv-teal-dark block">HỆ THỐNG QUẢN TRỊ HỒ SƠ</span>
               <span className="text-[10px] text-neutral-500 block">BIDV Hà Đông — Biểu mẫu KHTC/HKD</span>
             </div>

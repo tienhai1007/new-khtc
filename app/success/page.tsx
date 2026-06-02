@@ -80,7 +80,7 @@ function SuccessContent() {
             onClick={() => router.push('/')}
             priority
           />
-          <div className="border-l border-neutral-200 pl-3">
+          <div className="border-l border-neutral-200 pl-3 hidden sm:block">
             <p className="text-xs font-semibold text-bidv-teal">Hệ thống biểu mẫu trực tuyến</p>
             <p className="text-[10px] text-neutral-400">BIDV Hà Đông</p>
           </div>

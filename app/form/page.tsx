@@ -470,14 +470,14 @@ function FormWizard() {
               className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5 border border-neutral-200 text-neutral-600 hover:text-bidv-teal hover:border-bidv-teal/50 hover:bg-bidv-teal-light/45 rounded-lg transition-all shadow-sm"
             >
               <Shield className="w-3.5 h-3.5" />
-              Trang Quản trị
+              <span className="hidden sm:inline">Trang Quản trị</span>
             </button>
             <button
               onClick={() => router.push('/')}
               className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              Quay lại trang chủ
+              <span className="hidden sm:inline">Quay lại trang chủ</span>
             </button>
           </div>
         </div>
