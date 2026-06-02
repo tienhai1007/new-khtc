@@ -358,7 +358,7 @@ export const BM01_STEPS: WizardStep[] = [
     sections: [
       {
         id: 'd2-uq-chu-tk',
-        title: 'D.2 — Người đại diện theo ủy quyền',
+        title: 'Người đại diện theo ủy quyền',
         scope: 'khtc',
         fields: [
           { key: 'D2_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },
@@ -376,7 +376,7 @@ export const BM01_STEPS: WizardStep[] = [
       },
       {
         id: 'd3-ke-toan-truong',
-        title: 'D.3 — Kế toán trưởng / Người phụ trách kế toán',
+        title: 'Kế toán trưởng / Người phụ trách kế toán',
         scope: 'khtc',
         fields: [
           { key: 'D3_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },
@@ -394,7 +394,7 @@ export const BM01_STEPS: WizardStep[] = [
       },
       {
         id: 'd5-nguoi-gioi-thieu',
-        title: 'D.5 — Người giới thiệu đi giao dịch',
+        title: 'Người giới thiệu đi giao dịch',
         scope: 'khtc',
         fields: [
           { key: 'D5_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },

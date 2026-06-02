@@ -78,6 +78,7 @@ function FormWizard() {
     'd2-uq-chu-tk': false,
     'd3-ke-toan-truong': true, // Kế toán trưởng mặc định mở
     'd5-nguoi-gioi-thieu': false,
+    'bm02-user2': false,
   });
 
   const [kttIsDdpL, setKttIsDdpL] = useState('no'); // Kế toán trưởng kiêm nhiệm
@@ -103,9 +104,11 @@ function FormWizard() {
     filtered.forEach((step) => {
       step.sections.forEach((sec) => {
         sec.fields.forEach((f) => {
-          // Gán quốc tịch mặc định là Việt Nam
+          // Gán giá trị mặc định
           if (f.key.endsWith('QUOC_TICH')) {
             initialData[f.key] = 'Việt Nam';
+          } else if (f.key === 'NDDPL_CHUC_VU' && doiTuong === 'ho-kinh-doanh') {
+            initialData[f.key] = 'Chủ hộ kinh doanh';
           } else {
             initialData[f.key] = '';
           }
@@ -314,6 +317,10 @@ function FormWizard() {
         } else if (firstErrorKey.startsWith('D5_')) {
           setOpenAccordions((prev) => ({ ...prev, 'd5-nguoi-gioi-thieu': true }));
         }
+      } else if (step.id === 'nguoi-dung-nhdt-bm02' && doiTuong === 'khach-hang-to-chuc') {
+        if (firstErrorKey.startsWith('USER2_')) {
+          setOpenAccordions((prev) => ({ ...prev, 'bm02-user2': true }));
+        }
       }
 
       setTimeout(() => {
@@ -455,7 +462,7 @@ function FormWizard() {
               onClick={() => router.push('/')}
               priority
             />
-            <div className="border-l border-neutral-200 pl-3 hidden sm:block">
+            <div className="border-l border-neutral-200 pl-3 hidden md:block">
               <p className="text-sm font-semibold text-bidv-teal leading-tight">
                 {mdText} ({bmText})
               </p>
@@ -470,14 +477,14 @@ function FormWizard() {
               className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5 border border-neutral-200 text-neutral-600 hover:text-bidv-teal hover:border-bidv-teal/50 hover:bg-bidv-teal-light/45 rounded-lg transition-all shadow-sm"
             >
               <Shield className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Trang Quản trị</span>
+              <span className="hidden md:inline">Trang Quản trị</span>
             </button>
             <button
               onClick={() => router.push('/')}
               className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Quay lại trang chủ</span>
+              <span className="hidden md:inline">Quay lại trang chủ</span>
             </button>
           </div>
         </div>
@@ -716,8 +723,12 @@ function FormWizard() {
             <div className="space-y-8">
               {steps[currentStepIdx].sections.map((section) => {
                 
-                // ── BƯỚC 3 LAYOUT MỚI: ACCORDION BREAKDOWN (D.2, D.3, D.5) ──────
-                if (steps[currentStepIdx].id === 'uy-quyen') {
+                // ── BƯỚC 3 LAYOUT MỚI: ACCORDION BREAKDOWN (D.2, D.3, D.5 hoặc bm02-user2) ──────
+                const isAccordionSection = 
+                  steps[currentStepIdx].id === 'uy-quyen' || 
+                  (steps[currentStepIdx].id === 'nguoi-dung-nhdt-bm02' && section.id === 'bm02-user2' && doiTuong === 'khach-hang-to-chuc');
+
+                if (isAccordionSection) {
                   const isExpanded = openAccordions[section.id] || false;
                   
                   return (
