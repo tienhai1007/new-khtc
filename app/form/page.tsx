@@ -18,6 +18,7 @@ import {
   Trash2,
   UserCheck,
   FileCheck,
+  Shield,
 } from 'lucide-react';
 import {
   BM01_STEPS,
@@ -463,13 +464,22 @@ function FormWizard() {
               </p>
             </div>
           </div>
-          <button
-            onClick={() => router.push('/')}
-            className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Quay lại trang chủ
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push('/admin')}
+              className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5 border border-neutral-200 text-neutral-600 hover:text-bidv-teal hover:border-bidv-teal/50 hover:bg-bidv-teal-light/45 rounded-lg transition-all shadow-sm"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              Trang Quản trị
+            </button>
+            <button
+              onClick={() => router.push('/')}
+              className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Quay lại trang chủ
+            </button>
+          </div>
         </div>
       </header>
 
@@ -694,11 +704,11 @@ function FormWizard() {
               {/* Thay đổi Subtitle riêng cho bước 4 NHĐT */}
               {steps[currentStepIdx].id === 'nguoi-dung-nhdt' ? (
                 <p className="text-xs text-neutral-500 mt-1">
-                  Đăng ký thông tin người dùng để sử dụng dịch vụ Ngân hàng điện tử - BIDV Direct. Vui lòng điền đầy đủ và chính xác các thông tin dưới đây. Các trường có dấu <span className="text-red-500 font-bold">*</span> là bắt buộc.
+                  Đăng ký thông tin người dùng để sử dụng dịch vụ Ngân hàng điện tử - BIDV Direct. Vui lòng điền các thông tin dưới đây.
                 </p>
               ) : (
                 <p className="text-xs text-neutral-500 mt-1">
-                  Vui lòng điền đầy đủ và chính xác các thông tin dưới đây. Các trường có dấu <span className="text-red-500 font-bold">*</span> là bắt buộc.
+                  Vui lòng điền các thông tin dưới đây.
                 </p>
               )}
             </div>
@@ -723,7 +733,7 @@ function FormWizard() {
                             section.id === 'd3-ke-toan-truong' ? 'bg-bidv-teal' : 'bg-neutral-400'
                           }`} />
                           <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-wide">
-                            {section.title} {section.id === 'd3-ke-toan-truong' && <span className="text-red-500 font-bold">*</span>}
+                            {section.title}
                           </h3>
                         </div>
                         <div className="flex items-center gap-2">

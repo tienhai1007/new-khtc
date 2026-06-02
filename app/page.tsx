@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Building2,
   Store,
@@ -106,25 +107,35 @@ export default function HomePage() {
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header className="glass-header sticky top-0 z-40 w-full">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-3">
-          <div className="h-10 flex items-center">
-            <Image
-              src="/logo-bidv-hadong.png"
-              alt="BIDV Chi nhánh Hà Đông"
-              width={120}
-              height={40}
-              className="h-9 w-auto object-contain"
-              priority
-            />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="h-10 flex items-center">
+              <Image
+                src="/logo-bidv-hadong.png"
+                alt="BIDV Chi nhánh Hà Đông"
+                width={120}
+                height={40}
+                className="h-9 w-auto object-contain"
+                priority
+              />
+            </div>
+            <div className="border-l border-neutral-200 pl-3">
+              <p className="text-sm font-semibold text-bidv-teal leading-tight">
+                Biểu mẫu Đăng ký / Thay đổi thông tin
+              </p>
+              <p className="text-xs text-neutral-500 leading-tight">
+                Khách hàng tổ chức & Hộ kinh doanh
+              </p>
+            </div>
           </div>
-          <div className="border-l border-neutral-200 pl-3">
-            <p className="text-sm font-semibold text-bidv-teal leading-tight">
-              Biểu mẫu Đăng ký / Thay đổi thông tin
-            </p>
-            <p className="text-xs text-neutral-500 leading-tight">
-              Khách hàng tổ chức & Hộ kinh doanh
-            </p>
-          </div>
+          
+          <Link
+            href="/admin"
+            className="btn-outline py-1.5 px-3 text-xs flex items-center gap-1.5 border border-neutral-200 text-neutral-600 hover:text-bidv-teal hover:border-bidv-teal/50 hover:bg-bidv-teal-light/45 rounded-lg transition-all shadow-sm"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            Trang Quản trị
+          </Link>
         </div>
       </header>
 
