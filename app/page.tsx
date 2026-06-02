@@ -94,6 +94,28 @@ export default function HomePage() {
 
   const canProceed = mucDich !== null && doiTuong !== null;
 
+  const handleSelectMucDich = (id: MucDich) => {
+    setMucDich(id);
+    // Cuộn mượt mà xuống Bước 2 trên thiết bị di động
+    setTimeout(() => {
+      const step2El = document.getElementById('step-2-section');
+      if (step2El) {
+        step2El.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
+  const handleSelectDoiTuong = (id: DoiTuong) => {
+    setDoiTuong(id);
+    // Cuộn mượt mà xuống nút Bắt đầu
+    setTimeout(() => {
+      const ctaEl = document.getElementById('cta-section');
+      if (ctaEl) {
+        ctaEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  };
+
   const handleProceed = () => {
     if (!canProceed) return;
     const params = new URLSearchParams({ mucDich: mucDich!, doiTuong: doiTuong! });
@@ -201,7 +223,7 @@ export default function HomePage() {
                 return (
                   <button
                     key={opt.id}
-                    onClick={() => setMucDich(opt.id)}
+                    onClick={() => handleSelectMucDich(opt.id)}
                     className={`relative text-left p-4 rounded-2xl border-2 transition-all duration-200 group ${
                       isSelected
                         ? 'border-bidv-teal bg-bidv-teal-light shadow-card'
@@ -245,8 +267,10 @@ export default function HomePage() {
           {/* Step 2: Đối tượng (hiện ra sau khi chọn mục đích) */}
           {mucDich && (
             <section
+              id="step-2-section"
               key={mucDich}
               style={{ animation: 'var(--animate-fade-in-up)' }}
+              className="scroll-mt-20"
             >
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-6 h-6 rounded-full bg-bidv-teal text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
@@ -264,7 +288,7 @@ export default function HomePage() {
                   return (
                     <button
                       key={opt.id}
-                      onClick={() => setDoiTuong(opt.id)}
+                      onClick={() => handleSelectDoiTuong(opt.id)}
                       className={`card-tilt text-left p-6 rounded-2xl border-2 transition-all duration-200 group ${
                         isSelected
                           ? 'border-bidv-teal bg-gradient-to-br from-bidv-teal-light to-white shadow-premium'
@@ -309,8 +333,9 @@ export default function HomePage() {
           {/* CTA Button */}
           {canProceed && (
             <section
+              id="cta-section"
               style={{ animation: 'var(--animate-scale-up)' }}
-              className="flex flex-col items-center gap-3 pt-2"
+              className="flex flex-col items-center gap-3 pt-2 scroll-mt-20"
             >
               {/* Summary badge */}
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-neutral-200 shadow-card text-xs text-neutral-500">

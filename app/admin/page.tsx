@@ -299,13 +299,13 @@ export default function AdminDashboardPage() {
         {/* ── Stats & Tabs ───────────────────────────────────────────────────── */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Tab Selector */}
-          <div className="bg-white p-1 rounded-xl border border-neutral-200 flex gap-1 self-start">
+          <div className="bg-white p-1 rounded-xl border border-neutral-200 flex flex-wrap gap-1 w-full sm:w-auto">
             <button
               onClick={() => {
                 setActiveTab('BM01');
                 setFilterMucDich('all');
               }}
-              className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors flex items-center gap-2 ${
+              className={`px-3 py-2 md:px-4 md:py-2 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none ${
                 activeTab === 'BM01'
                   ? 'bg-bidv-teal text-white'
                   : 'text-neutral-600 hover:bg-neutral-100'
@@ -324,7 +324,7 @@ export default function AdminDashboardPage() {
                 setActiveTab('BM02');
                 setFilterMucDich('all');
               }}
-              className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors flex items-center gap-2 ${
+              className={`px-3 py-2 md:px-4 md:py-2 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none ${
                 activeTab === 'BM02'
                   ? 'bg-bidv-teal text-white'
                   : 'text-neutral-600 hover:bg-neutral-100'
@@ -412,11 +412,11 @@ export default function AdminDashboardPage() {
               <table className="w-full text-left border-collapse data-table">
                 <thead>
                   <tr className="bg-neutral-50 border-b border-neutral-200 text-neutral-700 text-[11px] font-semibold uppercase tracking-wider">
-                    <th className="py-3 px-4 w-12 text-center">STT</th>
-                    <th className="py-3 px-4">Thời gian gửi</th>
+                    <th className="py-3 px-4 w-12 text-center hidden md:table-cell">STT</th>
+                    <th className="py-3 px-4 hidden lg:table-cell">Thời gian gửi</th>
                     <th className="py-3 px-4">Tên Tổ chức / Hộ KD</th>
-                    <th className="py-3 px-4">Mã số thuế / Giấy tờ</th>
-                    <th className="py-3 px-4">Đại diện pháp luật</th>
+                    <th className="py-3 px-4 hidden sm:table-cell">Mã số thuế / Giấy tờ</th>
+                    <th className="py-3 px-4 hidden md:table-cell">Đại diện pháp luật</th>
                     <th className="py-3 px-4 text-center">Phân loại</th>
                     <th className="py-3 px-4 text-right">Thao tác</th>
                   </tr>
@@ -428,19 +428,19 @@ export default function AdminDashboardPage() {
 
                     return (
                       <tr key={item._rowId} className="hover:bg-neutral-50/80 transition-colors">
-                        <td className="py-3.5 px-4 text-center font-medium text-neutral-400">
+                        <td className="py-3.5 px-4 text-center font-medium text-neutral-400 hidden md:table-cell">
                           {index + 1}
                         </td>
-                        <td className="py-3.5 px-4 text-neutral-500 whitespace-nowrap">
+                        <td className="py-3.5 px-4 text-neutral-500 whitespace-nowrap hidden lg:table-cell">
                           {formatTimestamp(item.SYSTEM_TIMESTAMP)}
                         </td>
                         <td className="py-3.5 px-4 font-semibold max-w-xs truncate">
                           {item.TEN_TO_CHUC_VI}
                         </td>
-                        <td className="py-3.5 px-4 font-mono text-neutral-600">
+                        <td className="py-3.5 px-4 font-mono text-neutral-600 hidden sm:table-cell">
                           {item.MA_SO_THUE || item.SO_GIAY_TO_PHAP_LY || 'N/A'}
                         </td>
-                        <td className="py-3.5 px-4 text-neutral-700">
+                        <td className="py-3.5 px-4 text-neutral-700 hidden md:table-cell">
                           {item.NDDPL_HO_TEN || 'N/A'}
                         </td>
                         <td className="py-3.5 px-4 text-center space-y-1">
