@@ -82,7 +82,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Tên tổ chức (tiếng nước ngoài)',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             placeholder: 'Nếu có',
           },
           {
@@ -90,7 +90,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Tên viết tắt',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             placeholder: 'VD: BIDV, VCB...',
           },
           {
@@ -106,7 +106,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Loại hình đăng ký doanh nghiệp',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             placeholder: 'TNHH, Cổ phần, Tư nhân...',
           },
           {
@@ -317,7 +317,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Số thị thực / Giấy tờ thay thị thực (nếu có)',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             helperText: 'Chỉ điền nếu là người nước ngoài cư trú tại Việt Nam',
           },
           {
@@ -325,7 +325,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Ngày cấp thị thực',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             placeholder: 'dd/mm/yyyy',
           },
           {
@@ -333,7 +333,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Thị thực có giá trị đến ngày',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
             placeholder: 'dd/mm/yyyy',
           },
           {
@@ -341,7 +341,7 @@ export const BM01_STEPS: WizardStep[] = [
             label: 'Nơi cấp thị thực',
             type: 'text',
             required: false,
-            scope: 'both',
+            scope: 'khtc',
           },
         ],
       },

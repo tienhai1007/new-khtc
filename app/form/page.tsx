@@ -117,11 +117,24 @@ function FormWizard() {
     });
 
     // Thêm các trường phân quyền NHĐT
-    initialData['USER1_NHOM_QUYEN'] = 'Tạo giao dịch';
+    const isBM01Hkd = (mucDich === 'mo-moi' || mucDich === 'thay-doi') && doiTuong === 'ho-kinh-doanh';
+    initialData['USER1_NHOM_QUYEN'] = isBM01Hkd ? 'Vừa tạo vừa duyệt' : 'Tạo giao dịch';
     initialData['USER2_NHOM_QUYEN'] = 'Tạo giao dịch';
     initialData['USER3_NHOM_QUYEN'] = 'Tạo giao dịch';
 
     setFormData(initialData);
+
+    if (isBM01Hkd) {
+      setUserAutoFillSource((prev) => ({
+        ...prev,
+        user1: 'nddpl',
+      }));
+    } else {
+      setUserAutoFillSource((prev) => ({
+        ...prev,
+        user1: 'custom',
+      }));
+    }
   }, [mucDich, doiTuong]);
 
   // Đồng bộ thông tin Kế toán trưởng kiêm nhiệm khi thay đổi toggle hoặc thông tin của NDDPL
@@ -143,6 +156,56 @@ function FormWizard() {
       }));
     }
   }, [kttIsDdpL, formData['NDDPL_HO_TEN'], formData['NDDPL_CCCD_SO'], formData['NDDPL_SDT'], formData['NDDPL_EMAIL']]);
+
+  // Đồng bộ tự động điền thông tin người dùng NHĐT từ các nguồn tương ứng (Chủ tài khoản, KTT, ...)
+  useEffect(() => {
+    setFormData((prev) => {
+      let updated = false;
+      const next = { ...prev };
+
+      (['USER1', 'USER2', 'USER3'] as const).forEach((userPrefix) => {
+        const userKey = userPrefix.toLowerCase() as 'user1' | 'user2' | 'user3';
+        const sourceId = userAutoFillSource[userKey];
+        if (sourceId && sourceId !== 'custom') {
+          let sourcePrefix = '';
+          if (sourceId === 'nddpl') sourcePrefix = 'NDDPL';
+          else if (sourceId === 'd2') sourcePrefix = 'D2';
+          else if (sourceId === 'd3') sourcePrefix = 'D3';
+          else if (sourceId === 'd5') sourcePrefix = 'D5';
+
+          if (sourcePrefix) {
+            const fieldsToSync = [
+              { target: `${userPrefix}_HO_TEN`, source: `${sourcePrefix}_HO_TEN` },
+              { target: `${userPrefix}_CCCD_SO`, source: sourcePrefix === 'D5' ? 'D5_CCCD_SO' : `${sourcePrefix}_CCCD_SO` },
+              { target: `${userPrefix}_CCCD_NGAY_CAP`, source: sourcePrefix === 'D5' ? 'D5_CCCD_NGAY_CAP' : `${sourcePrefix}_CCCD_NGAY_CAP` },
+              { target: `${userPrefix}_CCCD_HET_HAN`, source: sourcePrefix === 'D5' ? 'D5_CCCD_HET_HAN' : `${sourcePrefix}_CCCD_HET_HAN` },
+              { target: `${userPrefix}_CCCD_NOI_CAP`, source: sourcePrefix === 'D5' ? 'D5_CCCD_NOI_CAP' : `${sourcePrefix}_CCCD_NOI_CAP` },
+              { target: `${userPrefix}_QUOC_TICH`, source: `${sourcePrefix}_QUOC_TICH` },
+              { target: `${userPrefix}_SDT`, source: `${sourcePrefix}_SDT` },
+              { target: `${userPrefix}_EMAIL`, source: sourcePrefix === 'D5' ? '' : `${sourcePrefix}_EMAIL` },
+            ];
+
+            fieldsToSync.forEach(({ target, source }) => {
+              const val = source ? (prev[source] || '') : '';
+              const finalVal = !val && target.endsWith('QUOC_TICH') ? 'Việt Nam' : val;
+              if (next[target] !== finalVal) {
+                next[target] = finalVal;
+                updated = true;
+              }
+            });
+          }
+        }
+      });
+
+      return updated ? next : prev;
+    });
+  }, [
+    userAutoFillSource,
+    formData['NDDPL_HO_TEN'], formData['NDDPL_CCCD_SO'], formData['NDDPL_CCCD_NGAY_CAP'], formData['NDDPL_CCCD_HET_HAN'], formData['NDDPL_CCCD_NOI_CAP'], formData['NDDPL_QUOC_TICH'], formData['NDDPL_SDT'], formData['NDDPL_EMAIL'],
+    formData['D2_HO_TEN'], formData['D2_CCCD_SO'], formData['D2_CCCD_NGAY_CAP'], formData['D2_CCCD_HET_HAN'], formData['D2_CCCD_NOI_CAP'], formData['D2_QUOC_TICH'], formData['D2_SDT'], formData['D2_EMAIL'],
+    formData['D3_HO_TEN'], formData['D3_CCCD_SO'], formData['D3_CCCD_NGAY_CAP'], formData['D3_CCCD_HET_HAN'], formData['D3_CCCD_NOI_CAP'], formData['D3_QUOC_TICH'], formData['D3_SDT'], formData['D3_EMAIL'],
+    formData['D5_HO_TEN'], formData['D5_CCCD_SO'], formData['D5_CCCD_NGAY_CAP'], formData['D5_CCCD_HET_HAN'], formData['D5_CCCD_NOI_CAP'], formData['D5_QUOC_TICH'], formData['D5_SDT']
+  ]);
 
   // Nếu thiếu param, hiển thị thông báo quay lại trang chủ
   if (!mucDich || !doiTuong) {
@@ -808,7 +871,11 @@ function FormWizard() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {section.fields.map((field) => {
                                 const hasError = !!errors[field.key];
-                                const isFullWidth = field.type === 'textarea' || field.key.includes('DIA_CHI') || field.key.includes('THUONG_TRU');
+                                const isFullWidth =
+                                  field.type === 'textarea' ||
+                                  field.key.includes('DIA_CHI') ||
+                                  field.key.includes('THUONG_TRU') ||
+                                  (doiTuong === 'ho-kinh-doanh' && ['TEN_TO_CHUC_VI', 'MA_SO_THUE', 'LINH_VUC_KD'].includes(field.key));
 
                                 return (
                                   <div
@@ -1052,7 +1119,11 @@ function FormWizard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {section.fields.map((field) => {
                         const hasError = !!errors[field.key];
-                        const isFullWidth = field.type === 'textarea' || field.key.includes('DIA_CHI') || field.key.includes('THUONG_TRU');
+                        const isFullWidth =
+                          field.type === 'textarea' ||
+                          field.key.includes('DIA_CHI') ||
+                          field.key.includes('THUONG_TRU') ||
+                          (doiTuong === 'ho-kinh-doanh' && ['TEN_TO_CHUC_VI', 'MA_SO_THUE', 'LINH_VUC_KD'].includes(field.key));
 
                         return (
                           <div
