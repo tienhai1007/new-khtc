@@ -96,8 +96,11 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Xử lý Download file docx
-  const handleDownload = async (record: SubmissionRecord, templateId: 'BM01' | 'BM02') => {
+  // Xử lý Download file docx hoặc zip
+  const handleDownload = async (
+    record: SubmissionRecord,
+    templateId: 'BM01' | 'BM02' | 'TB_mau_dau' | 'CAM_KET'
+  ) => {
     const uniqueId = `${templateId}-${record._rowId}`;
     setDownloadingId(uniqueId);
 
@@ -116,6 +119,8 @@ export default function AdminDashboardPage() {
         },
         body: JSON.stringify({
           templateId,
+          mucDich: record.SYSTEM_MUC_DICH,
+          doiTuong: record.SYSTEM_DOI_TUONG,
           data: cleanData,
         }),
       });
@@ -131,7 +136,7 @@ export default function AdminDashboardPage() {
 
       // Đọc header Content-Disposition để lấy tên file thực tế (nếu có)
       const disposition = res.headers.get('Content-Disposition');
-      let fileName = `${templateId}_HoSo.docx`;
+      let fileName = '';
       if (disposition && disposition.indexOf('filename=') !== -1) {
         const parts = disposition.split('filename=');
         fileName = decodeURIComponent(parts[1].replace(/['"]/g, ''));
@@ -140,7 +145,8 @@ export default function AdminDashboardPage() {
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '')
           .replace(/[^a-zA-Z0-9]/g, '_');
-        fileName = `${templateId}_${orgName}.docx`;
+        const isZip = templateId === 'BM01' && record.SYSTEM_MUC_DICH === 'mo-moi' && (record.SYSTEM_DOI_TUONG === 'khach-hang-to-chuc' || record.SYSTEM_DOI_TUONG === 'ho-kinh-doanh');
+        fileName = `${templateId}_${orgName}.${isZip ? 'zip' : 'docx'}`;
       }
 
       a.download = fileName;
@@ -467,11 +473,43 @@ export default function AdminDashboardPage() {
                             >
                               <Eye className="w-3.5 h-3.5" />
                             </button>
+
+                            {activeTab === 'BM01' &&
+                              item.SYSTEM_MUC_DICH === 'mo-moi' &&
+                              (item.SYSTEM_DOI_TUONG === 'khach-hang-to-chuc' ||
+                                item.SYSTEM_DOI_TUONG === 'ho-kinh-doanh') && (() => {
+                                  const companionTemplate = item.SYSTEM_DOI_TUONG === 'khach-hang-to-chuc' ? 'TB_mau_dau' : 'CAM_KET';
+                                  const companionTitle = item.SYSTEM_DOI_TUONG === 'khach-hang-to-chuc' 
+                                    ? 'Tải biểu mẫu đi kèm: Thông báo mẫu dấu' 
+                                    : 'Tải biểu mẫu đi kèm: Bản cam kết';
+                                  const companionDocxId = `${companionTemplate}-${item._rowId}`;
+                                  const isThisDownloading = downloadingId === companionDocxId;
+                                  return (
+                                    <button
+                                      onClick={() => handleDownload(item, companionTemplate)}
+                                      disabled={!!downloadingId}
+                                      className="btn-outline p-1.5 text-amber-600 hover:text-amber-700 hover:bg-amber-50 border border-amber-200 rounded-md shadow-sm disabled:opacity-50"
+                                      title={companionTitle}
+                                    >
+                                      {isThisDownloading ? (
+                                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                      ) : (
+                                        <FileText className="w-3.5 h-3.5" />
+                                      )}
+                                    </button>
+                                  );
+                                })()
+                            }
+
                             <button
                               onClick={() => handleDownload(item, activeTab)}
-                              disabled={downloadingId === docxId}
+                              disabled={!!downloadingId}
                               className="btn-primary p-1.5 rounded-md shadow-sm disabled:opacity-50"
-                              title="Tải biểu mẫu điền sẵn"
+                              title={
+                                activeTab === 'BM01' && item.SYSTEM_MUC_DICH === 'mo-moi' && (item.SYSTEM_DOI_TUONG === 'khach-hang-to-chuc' || item.SYSTEM_DOI_TUONG === 'ho-kinh-doanh')
+                                  ? "Tải toàn bộ hồ sơ (file ZIP)"
+                                  : "Tải biểu mẫu điền sẵn"
+                              }
                             >
                               {downloadingId === docxId ? (
                                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />

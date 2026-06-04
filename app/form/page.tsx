@@ -501,14 +501,24 @@ function FormWizard() {
       const a = document.createElement('a');
       a.href = url;
 
-      const cleanOrgName = (formData['TEN_TO_CHUC_VI'] || 'KieuMau')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-zA-Z0-9]/g, '_')
-        .substring(0, 30);
-      const prefix = mucDich === 'cap-lai-mat-khau' ? 'BM02' : 'BM01';
-      a.download = `${prefix}_${cleanOrgName}.docx`;
+      // Đọc header Content-Disposition để lấy tên file thực tế (nếu có)
+      const disposition = response.headers.get('Content-Disposition');
+      let fileName = '';
+      if (disposition && disposition.indexOf('filename=') !== -1) {
+        const parts = disposition.split('filename=');
+        fileName = decodeURIComponent(parts[1].replace(/['"]/g, ''));
+      } else {
+        const cleanOrgName = (formData['TEN_TO_CHUC_VI'] || 'KieuMau')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-zA-Z0-9]/g, '_')
+          .substring(0, 30);
+        const prefix = mucDich === 'cap-lai-mat-khau' ? 'BM02' : 'BM01';
+        const isZip = mucDich === 'mo-moi' && (doiTuong === 'khach-hang-to-chuc' || doiTuong === 'ho-kinh-doanh');
+        fileName = `${prefix}_${cleanOrgName}.${isZip ? 'zip' : 'docx'}`;
+      }
 
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
