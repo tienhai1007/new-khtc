@@ -48,8 +48,8 @@ export interface WizardStep {
 // Danh sách nơi cấp CCCD chuẩn
 export const NOI_CAP_CCCD_OPTIONS = [
   'Bộ Công An',
-  'Cục QlXNC',
-  'CCS QLHCVTTXH'
+  'Cục QLXNC',
+  'CCSQLHCVTTXH'
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -143,7 +143,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NGAY_CAP_LAN_DAU',
             label: 'Ngày cấp lần đầu',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'both',
             placeholder: 'dd/mm/yyyy',
@@ -151,7 +151,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NGAY_DIEU_CHINH',
             label: 'Ngày điều chỉnh gần nhất',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'both',
             placeholder: 'dd/mm/yyyy',
@@ -238,7 +238,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NDDPL_NGAY_SINH',
             label: 'Ngày tháng năm sinh',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'both',
             placeholder: 'dd/mm/yyyy',
@@ -291,7 +291,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NDDPL_CCCD_NGAY_CAP',
             label: 'Ngày cấp',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'both',
             placeholder: 'dd/mm/yyyy',
@@ -299,7 +299,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NDDPL_CCCD_HET_HAN',
             label: 'Có giá trị đến ngày',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'both',
             placeholder: 'dd/mm/yyyy',
@@ -323,7 +323,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NDDPL_THI_THUC_NGAY_CAP',
             label: 'Ngày cấp thị thực',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'khtc',
             placeholder: 'dd/mm/yyyy',
@@ -331,7 +331,7 @@ export const BM01_STEPS: WizardStep[] = [
           {
             key: 'NDDPL_THI_THUC_HET_HAN',
             label: 'Thị thực có giá trị đến ngày',
-            type: 'text',
+            type: 'date',
             required: false,
             scope: 'khtc',
             placeholder: 'dd/mm/yyyy',
@@ -363,11 +363,11 @@ export const BM01_STEPS: WizardStep[] = [
         fields: [
           { key: 'D2_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },
           { key: 'D2_CHUC_VU',      label: 'Chức vụ',           type: 'text',  required: false, scope: 'khtc' },
-          { key: 'D2_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'text', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D2_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'date', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D2_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false, scope: 'khtc', placeholder: 'Mặc định: Việt Nam' },
           { key: 'D2_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text', required: false, scope: 'khtc' },
-          { key: 'D2_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
-          { key: 'D2_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D2_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D2_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D2_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false, scope: 'khtc', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'D2_SDT',          label: 'Số điện thoại',      type: 'tel',   required: false, scope: 'khtc' },
           { key: 'D2_EMAIL',        label: 'Email',               type: 'email', required: false, scope: 'khtc' },
@@ -381,11 +381,11 @@ export const BM01_STEPS: WizardStep[] = [
         fields: [
           { key: 'D3_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },
           { key: 'D3_CHUC_VU',      label: 'Chức vụ',           type: 'text',  required: false, scope: 'khtc', placeholder: 'Kế toán trưởng...' },
-          { key: 'D3_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'text', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D3_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'date', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D3_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false, scope: 'khtc', placeholder: 'Mặc định: Việt Nam' },
           { key: 'D3_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text', required: false, scope: 'khtc' },
-          { key: 'D3_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
-          { key: 'D3_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D3_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D3_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D3_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false, scope: 'khtc', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'D3_SDT',          label: 'Số điện thoại',      type: 'tel',   required: false, scope: 'khtc' },
           { key: 'D3_EMAIL',        label: 'Email',               type: 'email', required: false, scope: 'khtc' },
@@ -398,11 +398,11 @@ export const BM01_STEPS: WizardStep[] = [
         scope: 'khtc',
         fields: [
           { key: 'D5_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'khtc' },
-          { key: 'D5_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'text', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D5_NGAY_SINH',    label: 'Ngày tháng năm sinh', type: 'date', required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D5_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false, scope: 'khtc', placeholder: 'Mặc định: Việt Nam' },
           { key: 'D5_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text', required: false, scope: 'khtc' },
-          { key: 'D5_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
-          { key: 'D5_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D5_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
+          { key: 'D5_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false, scope: 'khtc', placeholder: 'dd/mm/yyyy' },
           { key: 'D5_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false, scope: 'khtc', options: NOI_CAP_CCCD_OPTIONS },
         ],
       },
@@ -423,8 +423,8 @@ export const BM01_STEPS: WizardStep[] = [
         fields: [
           { key: 'USER1_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false,  scope: 'both' },
           { key: 'USER1_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text',  required: false,  scope: 'both', placeholder: '012xxxxxxxxx' },
-          { key: 'USER1_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'USER1_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER1_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER1_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'USER1_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false,  scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'USER1_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false,  scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'USER1_SDT',          label: 'Số điện thoại',      type: 'tel',   required: false,  scope: 'both' },
@@ -438,8 +438,8 @@ export const BM01_STEPS: WizardStep[] = [
         fields: [
           { key: 'USER2_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'both' },
           { key: 'USER2_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text',  required: false, scope: 'both' },
-          { key: 'USER2_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'USER2_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER2_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER2_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'USER2_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false, scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'USER2_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false, scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'USER2_SDT',          label: 'Số điện thoại',      type: 'tel',   required: false, scope: 'both' },
@@ -453,8 +453,8 @@ export const BM01_STEPS: WizardStep[] = [
         fields: [
           { key: 'USER3_HO_TEN',       label: 'Họ và tên',         type: 'text',  required: false, scope: 'both' },
           { key: 'USER3_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text',  required: false, scope: 'both' },
-          { key: 'USER3_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'USER3_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER3_CCCD_NGAY_CAP', label: 'Ngày cấp',         type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER3_CCCD_HET_HAN', label: 'Có giá trị đến',    type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'USER3_CCCD_NOI_CAP', label: 'Nơi cấp',           type: 'select', required: false, scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'USER3_QUOC_TICH',    label: 'Quốc tịch',         type: 'text',  required: false, scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'USER3_SDT',          label: 'Số điện thoại',      type: 'tel',   required: false, scope: 'both' },
@@ -488,8 +488,8 @@ export const BM02_STEPS: WizardStep[] = [
           { key: 'NDDPL_CHUC_VU',       label: 'Chức vụ',               type: 'text',     required: false,  scope: 'both' },
           { key: 'NDDPL_QUOC_TICH',     label: 'Quốc tịch',             type: 'text',     required: false,  scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'NDDPL_CCCD_SO',       label: 'Số CCCD / Hộ chiếu',    type: 'text',     required: false,  scope: 'both' },
-          { key: 'NDDPL_CCCD_NGAY_CAP', label: 'Ngày cấp',              type: 'text',     required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'NDDPL_CCCD_HET_HAN',  label: 'Có giá trị đến ngày',   type: 'text',     required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'NDDPL_CCCD_NGAY_CAP', label: 'Ngày cấp',              type: 'date',     required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'NDDPL_CCCD_HET_HAN',  label: 'Có giá trị đến ngày',   type: 'date',     required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'NDDPL_CCCD_NOI_CAP',  label: 'Nơi cấp',               type: 'select',   required: false,  scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
         ],
       },
@@ -508,8 +508,8 @@ export const BM02_STEPS: WizardStep[] = [
         fields: [
           { key: 'USER1_HO_TEN',       label: 'Họ và tên',          type: 'text',  required: false,  scope: 'both' },
           { key: 'USER1_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text',  required: false,  scope: 'both' },
-          { key: 'USER1_CCCD_NGAY_CAP', label: 'Ngày cấp',          type: 'text',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'USER1_CCCD_HET_HAN', label: 'Có giá trị đến',     type: 'text',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER1_CCCD_NGAY_CAP', label: 'Ngày cấp',          type: 'date',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER1_CCCD_HET_HAN', label: 'Có giá trị đến',     type: 'date',  required: false,  scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'USER1_CCCD_NOI_CAP', label: 'Nơi cấp',            type: 'select', required: false,  scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'USER1_QUOC_TICH',    label: 'Quốc tịch',          type: 'text',  required: false,  scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'USER1_SDT',          label: 'Số điện thoại',       type: 'tel',   required: false,  scope: 'both' },
@@ -523,8 +523,8 @@ export const BM02_STEPS: WizardStep[] = [
         fields: [
           { key: 'USER2_HO_TEN',       label: 'Họ và tên',          type: 'text',  required: false, scope: 'both' },
           { key: 'USER2_CCCD_SO',      label: 'Số CCCD / Hộ chiếu', type: 'text',  required: false, scope: 'both' },
-          { key: 'USER2_CCCD_NGAY_CAP', label: 'Ngày cấp',          type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
-          { key: 'USER2_CCCD_HET_HAN', label: 'Có giá trị đến',     type: 'text',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER2_CCCD_NGAY_CAP', label: 'Ngày cấp',          type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
+          { key: 'USER2_CCCD_HET_HAN', label: 'Có giá trị đến',     type: 'date',  required: false, scope: 'both', placeholder: 'dd/mm/yyyy' },
           { key: 'USER2_CCCD_NOI_CAP', label: 'Nơi cấp',            type: 'select', required: false, scope: 'both', options: NOI_CAP_CCCD_OPTIONS },
           { key: 'USER2_QUOC_TICH',    label: 'Quốc tịch',          type: 'text',  required: false, scope: 'both', placeholder: 'Mặc định: Việt Nam' },
           { key: 'USER2_SDT',          label: 'Số điện thoại',       type: 'tel',   required: false, scope: 'both' },

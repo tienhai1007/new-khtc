@@ -57,6 +57,29 @@ function formatDataForOutput(
   return formatted;
 }
 
+function formatDatePickerValue(value: string, prevValue: string = ''): string {
+  const clean = value.replace(/\D/g, '');
+  
+  if (value.length < prevValue.length) {
+    if (prevValue.endsWith('/') && clean.length > 0) {
+      const shortened = clean.slice(0, -1);
+      if (shortened.length >= 4) {
+        return `${shortened.slice(0, 2)}/${shortened.slice(2, 4)}/${shortened.slice(4, 8)}`;
+      } else if (shortened.length >= 2) {
+        return `${shortened.slice(0, 2)}/${shortened.slice(2)}`;
+      }
+      return shortened;
+    }
+  }
+  
+  if (clean.length >= 4) {
+    return `${clean.slice(0, 2)}/${clean.slice(2, 4)}/${clean.slice(4, 8)}`;
+  } else if (clean.length >= 2) {
+    return `${clean.slice(0, 2)}/${clean.slice(2)}`;
+  }
+  return clean;
+}
+
 // ── Main Wizard Component ────────────────────────────────────────────────────
 
 function FormWizard() {
@@ -239,7 +262,19 @@ function FormWizard() {
   const isLastStep = currentStepIdx === steps.length; // Bước cuối cùng là bước Hoàn thiện review
 
   const handleInputChange = (key: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
+    let formattedValue = value;
+    
+    const isDateField = steps.some((step) =>
+      step.sections.some((sec) =>
+        sec.fields.some((f) => f.key === key && f.type === 'date')
+      )
+    );
+
+    if (isDateField) {
+      formattedValue = formatDatePickerValue(value, formData[key] || '');
+    }
+
+    setFormData((prev) => ({ ...prev, [key]: formattedValue }));
     if (errors[key]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -348,7 +383,7 @@ function FormWizard() {
           isValid = false;
         }
 
-        // 2. Định dạng email/sđt/mst
+        // 2. Định dạng email/sđt/mst/ngày tháng
         if (val) {
           if (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
             nextErrors[f.key] = 'Địa chỉ email không hợp lệ (VD: contact@company.com)';
@@ -360,6 +395,10 @@ function FormWizard() {
           }
           if (f.key === 'MA_SO_THUE' && !/^[0-9]{10,13}$/.test(val.replace(/[^0-9]/g, ''))) {
             nextErrors[f.key] = 'Mã số thuế không hợp lệ (10 hoặc 13 chữ số)';
+            isValid = false;
+          }
+          if (f.type === 'date' && !/^\d{2}\/\d{2}\/\d{4}$/.test(val)) {
+            nextErrors[f.key] = 'Ngày tháng không hợp lệ (định dạng dd/mm/yyyy)';
             isValid = false;
           }
         }
@@ -916,7 +955,7 @@ function FormWizard() {
                                     ) : (
                                       <input
                                         id={field.key}
-                                        type={field.type}
+                                        type={field.type === 'date' ? 'text' : field.type}
                                         value={formData[field.key] || ''}
                                         onChange={(e) => handleInputChange(field.key, e.target.value)}
                                         placeholder={field.placeholder || `Nhập ${field.label.toLowerCase()}`}
@@ -1077,7 +1116,7 @@ function FormWizard() {
                               ) : (
                                 <input
                                   id={field.key}
-                                  type={field.type}
+                                  type={field.type === 'date' ? 'text' : field.type}
                                   value={formData[field.key] || ''}
                                   onChange={(e) => handleInputChange(field.key, e.target.value)}
                                   placeholder={field.placeholder || `Nhập ${field.label.toLowerCase()}`}
@@ -1164,7 +1203,7 @@ function FormWizard() {
                             ) : (
                               <input
                                 id={field.key}
-                                type={field.type}
+                                type={field.type === 'date' ? 'text' : field.type}
                                 value={formData[field.key] || ''}
                                 onChange={(e) => handleInputChange(field.key, e.target.value)}
                                 placeholder={field.placeholder || `Nhập ${field.label.toLowerCase()}`}
