@@ -44,7 +44,17 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-neutral-50 flex flex-col">
+      <div className="w-full bg-amber-50 border-b border-amber-200 px-4 py-1 text-center">
+        <p className="text-[11px] text-amber-800">
+          <strong>Công cụ nội bộ</strong> BIDV Chi nhánh Hà Đông — không phải website chính thức.{' '}
+          Trang chính thức:{' '}
+          <a href="https://bidv.com.vn" target="_blank" rel="noopener noreferrer" className="underline font-semibold">
+            bidv.com.vn
+          </a>
+        </p>
+      </div>
+      <div className="flex-1 flex items-center justify-center p-4">
       <div
         className="max-w-md w-full bg-white rounded-3xl border border-neutral-200 shadow-premium p-8 space-y-8"
         style={{ animation: 'var(--animate-scale-up)' }}
@@ -127,10 +137,6 @@ export default function AdminLoginPage() {
           <p className="text-[10px] text-neutral-400 leading-normal">
             Hệ thống nội bộ được bảo mật. Mọi hành vi truy cập trái phép sẽ bị ghi lại log và xử lý theo quy định của ngân hàng.
           </p>
-          <p className="text-[10px] text-neutral-400 leading-normal">
-            Website nhằm mục đích hỗ trợ công tác tác nghiệp cho cán bộ BIDV Chi nhánh Hà Đông,
-            không phải website chính thức của BIDV (bidv.com.vn).
-          </p>
           <div className="flex justify-center pt-1">
             <Link
               href="/"
@@ -141,6 +147,7 @@ export default function AdminLoginPage() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
