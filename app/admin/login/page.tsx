@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Lock, Eye, EyeOff, Loader2, AlertCircle, ArrowLeft } from 'lucide-react';
 
@@ -53,14 +52,9 @@ export default function AdminLoginPage() {
         {/* Header */}
         <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <Image
-              src="/logo-bidv-hadong.png"
-              alt="BIDV Chi nhánh Hà Đông"
-              width={160}
-              height={50}
-              className="h-12 w-auto object-contain"
-              priority
-            />
+            <span className="text-xl font-bold text-bidv-teal tracking-tight">
+              BIDV Hà Đông
+            </span>
           </div>
           <div className="space-y-1">
             <h1 className="text-lg font-bold text-neutral-900">
@@ -132,6 +126,10 @@ export default function AdminLoginPage() {
         <div className="text-center pt-2 border-t border-neutral-100 space-y-3">
           <p className="text-[10px] text-neutral-400 leading-normal">
             Hệ thống nội bộ được bảo mật. Mọi hành vi truy cập trái phép sẽ bị ghi lại log và xử lý theo quy định của ngân hàng.
+          </p>
+          <p className="text-[10px] text-neutral-400 leading-normal">
+            Website nhằm mục đích hỗ trợ công tác tác nghiệp cho cán bộ BIDV Chi nhánh Hà Đông,
+            không phải website chính thức của BIDV (bidv.com.vn).
           </p>
           <div className="flex justify-center pt-1">
             <Link

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   Search,
@@ -227,14 +226,9 @@ export default function AdminDashboardPage() {
       <header className="glass-header sticky top-0 z-40 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo-bidv-hadong.png"
-              alt="BIDV Chi nhánh Hà Đông"
-              width={110}
-              height={36}
-              className="h-8 w-auto object-contain"
-              priority
-            />
+            <span className="text-base font-bold text-bidv-teal tracking-tight">
+              BIDV Hà Đông
+            </span>
             <div className="border-l border-neutral-200 pl-3 hidden md:block">
               <span className="text-xs font-semibold text-bidv-teal-dark block">HỆ THỐNG QUẢN TRỊ HỒ SƠ</span>
               <span className="text-[10px] text-neutral-500 block">BIDV Hà Đông — Biểu mẫu KHTC/HKD</span>
@@ -619,13 +613,28 @@ export default function AdminDashboardPage() {
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
       <footer className="border-t border-neutral-200 bg-white py-4 px-4 mt-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-neutral-400">
-            © 2026 BIDV Chi nhánh Hà Đông — Hệ thống quản trị nội bộ
+        <div className="max-w-7xl mx-auto space-y-2">
+          <p className="text-xs text-neutral-500 text-center leading-relaxed">
+            Website nhằm mục đích hỗ trợ công tác tác nghiệp cho cán bộ BIDV Chi nhánh Hà Đông,{' '}
+            <span className="font-semibold">không phải website chính thức của BIDV</span> (
+            <a
+              href="https://bidv.com.vn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-bidv-teal hover:underline"
+            >
+              bidv.com.vn
+            </a>
+            ).
           </p>
-          <p className="text-xs text-neutral-400">
-            197 Quang Trung, Hà Đông, Hà Nội
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p className="text-xs text-neutral-400">
+              © 2026 BIDV Chi nhánh Hà Đông — Hệ thống quản trị nội bộ
+            </p>
+            <p className="text-xs text-neutral-400">
+              197 Quang Trung, Hà Đông, Hà Nội
+            </p>
+          </div>
         </div>
       </footer>
     </div>
